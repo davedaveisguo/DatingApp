@@ -17,6 +17,7 @@ namespace DatingAPP.API.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult GetValues()
         {
             var values=_context.Values.ToList();
