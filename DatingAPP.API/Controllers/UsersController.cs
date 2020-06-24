@@ -4,12 +4,14 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DatingAPP.API.Data;
 using DatingAPP.API.Dtos;
+using DatingAPP.API.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DatingAPP.API.Controllers
 {
-
+    // any method called in this controller the user activity will be updated
+    [ServiceFilter(typeof(LogUserActivity))]
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]

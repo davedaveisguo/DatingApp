@@ -1,5 +1,5 @@
 import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Pipe, Injectable, PipeTransform } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -9,6 +9,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxGalleryModule } from 'ngx-gallery-9';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import {TimeAgoPipe} from 'time-ago-pipe';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -34,6 +35,18 @@ export function tokenGetter() {
   return localStorage.getItem('token');
 }
 
+@Pipe({
+  name: 'timeAgo',
+  pure: false
+})
+export class TimeAgoExtendsPipePipe extends TimeAgoPipe implements PipeTransform {
+
+  transform(value: string): string {
+    return super.transform(value);
+  }
+}
+
+@Injectable()
 export class CustomHammerConfig extends HammerGestureConfig
 {
   overrides = {
@@ -54,7 +67,8 @@ export class CustomHammerConfig extends HammerGestureConfig
     MemberCardComponent,
     MemberDetailComponent,
     MemberEditComponent,
-    PhotoEditorComponent
+    PhotoEditorComponent,
+    TimeAgoExtendsPipePipe
     
   ],
   imports: [
