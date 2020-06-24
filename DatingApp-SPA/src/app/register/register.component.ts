@@ -64,6 +64,7 @@ export class RegisterComponent implements OnInit {
 
     if(this.registerForm.valid)
     {
+        // copy the value of object to target object
         this.user = Object.assign({}, this.registerForm.value);
         this.authService.register(this.user).subscribe(()=>{
           this.alertify.success('registration successful');
